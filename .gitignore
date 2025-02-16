@@ -1,0 +1,90 @@
+# VS Code specific files
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Eclipse specific files
+.settings/
+.project
+.classpath
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+
+# Maven specific files
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle specific files
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Spring Boot specific files
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+spring-boot-devtools.properties
+
+# Other common files
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.orig
+*.rej
+*.sublime-workspace
+*.sublime-project
+*.bak
+*.swp
+*~
+*.lock
+*.diff
+*.patch
+*.idea
+*.vscode
+*.history
+*.log
+*.tmp
+*.cache
+*.env
+*.env.local
+*.env.development
+*.env.test

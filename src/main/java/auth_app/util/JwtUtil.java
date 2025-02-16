@@ -1,3 +1,5 @@
+
+/* 
 package auth_app.util;
 
 import io.jsonwebtoken.Claims;
@@ -74,3 +76,5 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 }
+
+*/
