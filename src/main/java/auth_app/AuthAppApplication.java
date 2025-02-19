@@ -11,3 +11,5 @@ public class AuthAppApplication {
 	}
 
 }
+
+//Todo: Implement the JwtUtil class
