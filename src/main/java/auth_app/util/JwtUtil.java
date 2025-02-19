@@ -1,5 +1,4 @@
-
-/* 
+/* */
 package auth_app.util;
 
 import io.jsonwebtoken.Claims;
@@ -58,7 +57,7 @@ public class JwtUtil {
 
     // Extract all claims from token
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
+        return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .build()
                 .parseClaimsJws(token)
@@ -77,4 +76,3 @@ public class JwtUtil {
     }
 }
 
-*/
