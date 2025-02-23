@@ -1,41 +1,51 @@
-/* */
 package auth_app.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import static io.jsonwebtoken.Jwts.*;
-
 @Component
 public class JwtUtil {
 
-    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256); // Generate a secure key
+    @Value("${jwt.secret}")
+    private String secret;
+
     private static final long EXPIRATION_TIME = 864_000_000; // 10 days in milliseconds
+
+    private Key getSigningKey() {
+        byte[] keyBytes = Base64.getDecoder().decode(secret);
+        System.out.println("KeyByte"+keyBytes);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
 
     // Generate a token for a user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("alg",userDetails.getUsername());
         return createToken(claims, userDetails.getUsername());
     }
 
     // Create a token
     private String createToken(Map<String, Object> claims, String subject) {
-        return builder()
+
+        System.out.println("Incoming claims: " + claims);
+        return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SECRET_KEY)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -57,8 +67,8 @@ public class JwtUtil {
 
     // Extract all claims from token
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -75,4 +85,3 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 }
-
