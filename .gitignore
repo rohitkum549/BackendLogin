@@ -4,7 +4,6 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.vscode
 
 # Eclipse specific files
 .settings/
@@ -22,6 +21,7 @@ local.properties
 
 # Maven specific files
 target/
+!target/gradle/wrapper/gradle-wrapper.jar  # Allow only wrapper JAR
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
